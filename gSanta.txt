@@ -1,0 +1,223 @@
+
+
+.login
+ + login and register user
+ - user edit profile
+ - my purchased articles
+ - add user picture
+ - view user profile with comments
+
+.upload article with picture or video
+  + title
+  + date
+  + description
+  + author?
+  + category
+  + image, background picture
+  + video url
+  + text body
+  + comments
+  + price
+  + add logged in author to article automatically
+  - allow default values for some fields
+  + show edit article only for author
+  + protect create/edit/delete route if logged in is not author
+  + link to author
+
+.courses
+ + make model
+ + add relationship
+ + create course
+ + view list of courses
+ + view one course
+ + list courses as collection of video articles
+ + add video to course
+ + add edit/new/delete buttons only for admin
+ + link to articles and vice versa
+ + protect create/edit/delete route if logged in is not author
+ + add course picture
+
+### this is not working as expected, but should be investigated: php artisan make:resource books
+### i looked for command to make everything in one go: models, migrations, controller, routes - full rest api scafolding for one model.
+php artisan make:auth
+php artisan make:model Article -m
+php artisan make:controller ArticleController --resource
+php artisan make:migration change_body_of_articles
+php artisan migrate
+php artisan make:middleware SetLanguage
+
+.authors
+ + make model
+ + add relationship
+ + list authors
+ + list articles by author
+
+ + artisan tinker author
+    $author = new App\Author;
+    $author->name = "Gorana Rakic-Bajic"
+    $author->title = 'Phd of Psychology';
+    $author->biography = '';
+    $author->image = '';
+    $author->user_id = '1';
+    $author->save();
+
+attach tag to article
+ $article = App\Article::find(1);
+ $article->tags()->attach(1);
+
+
+ + add author manually:
+    php artisan tinker
+    $author = new App\Author;
+    $author->image = '';
+    $author->title = 'Programmer';
+    $author->biography = 'Expert at home maintenance.';
+    $author->user_id = 1;
+    $author->name = 'Petar Bajic';
+    $author->save();
+    App\Author::all();
+
+.add rich text editor for article body
+ + add summernote
+ + make summernote upload picture
+ + check summernote pick url 
+
+.comments
+ + make model
+ + add relationship
+ + submit comment when logged in
+ - admin to see list of all comments and edit/delete them
+ - korisnici da imaju opciju da postuju anonimous
+ - when unauthenticated posts comment send him to login and post comment
+
+.add tags
+ + create model and controller
+ + many to many relationship with article
+ - add new tags while creating article
+ - add tag colors
+
+artisan tinker tag:
+ $tag = new App\Tag;
+ $tag->name = 'psychology';
+ $tag->save();
+
+
+
+.google/facebook authentication (OAuth?)
+ - google
+   + go here and follow instr to create google oauth client account: https://developers.google.com/identity/sign-in/web/devconsole-project
+   + ends up here: https://console.developers.google.com/apis/credentials?project=gpositive-152217
+    + make sure to set redirect and js links
+   + go here and follow instr to instal socialite to laravel project: https://github.com/laravel/socialite
+   + client id: 57182562399-4up23bv4k5bdtv5ld6g1hol6pam0cb3b.apps.googleusercontent.com
+   + client secret: yB6W0cYr0QUsYK_DcGWSQ8h7
+   + some error "reason":"accessNotConfigured" go to console and on dashboard click google+ api then click enable in top row
+   + sve radi ali nije ulogovan, sta sad? trebalo je dodati usera u nas sistem prema: https://blog.damirmiladinov.com/laravel/laravel-5.2-socialite-facebook-login.html#.WE2CaswrJhE
+   + stavi lepe dugmice za login
+   + dodaj facebook
+   - dodaj tweeter
+   - remember me for long
+
+User {#260 ▼
+  +token: "ya29.CjCyA0JdUu2j0zdu5DebJGvWnFkOinDir-KFjBnYEOrHT3z_ie8B3xQzUGeO4Vj63tg"
+  +refreshToken: null
+  +expiresIn: 3599
+  +id: "109861338444164519175"
+  +nickname: null
+  +name: "Petar Bajic"
+  +email: "extra.pedestrian@gmail.com"
+  +avatar: "https://lh3.googleusercontent.com/-Tv1t0jG6U1w/AAAAAAAAAAI/AAAAAAAABCE/hux46Wv9uIg/photo.jpg?sz=50"
+  +user: array:21 [▶]
+  +"avatar_original": "https://lh3.googleusercontent.com/-Tv1t0jG6U1w/AAAAAAAAAAI/AAAAAAAABCE/hux46Wv9uIg/photo.jpg"
+}
+
+
+
++languages - sr/en/de
+ + link to change language: http://gpositive.app/language/sr
+ + add sr lang
+ + postavi sr lang u cookie
+ + pozovi sr lang translate u bladeu
+ + namesti zastavice sa linkovima koje setuju jezike
+ + namesti da na jednom mestu se postavlja lang za sve strane
+ - isprevedi sve
+ - prikazi na jeziku posetioca
+ - definisi jezik artikla preko taga npr "lang-en"
+
+.picni sajt
+ - lista articla
+ - lista kurseva sa videjima
+ - show article
+ - picni komente
+ + picni tagove
+ - picni listu artikala od tagova
+ - picni listu artikala od autora
+
+eyJpdiI6IjA5SXFxbEpTQVNrbGNWMExqS3RpUGc9PSIsInZhbHVlIjoiN3hvbmZ5QmhCU1FLdHptM3R2OENNZz09IiwibWFjIjoiZTNjZmM5NjczMDZmZjc4MDk0NGQ5YTU2NDE1MjhjZGM1YjFmMGEzYjdlNTA2MGRiZWU0YmM2OTk1YmIyOTIwMiJ9
+eyJpdiI6IjA5SXFxbEpTQVNrbGNWMExqS3RpUGc9PSIsInZhbHVlIjoiN3hvbmZ5QmhCU1FLdHptM3R2OENNZz09IiwibWFjIjoiZTNjZmM5NjczMDZmZjc4MDk0NGQ5YTU2NDE1MjhjZGM1YjFmMGEzYjdlNTA2MGRiZWU0YmM2OTk1YmIyOTIwMiJ9
+eyJpdiI6Ilhnd2xOb3hVckhcL0h4c1BzWXR6RXZnPT0iLCJ2YWx1ZSI6InowTTIwNWdmZjRFeHBSZWk1Nko1c3c9PSIsIm1hYyI6IjYxNmZjOGExNjU4MmNmYjQ1MWQwNjFjZmQ0ZTczMTA2NDU3ZDMyZTk3ZjAwYzZmN2RmYmJmNjNlMmM4NDk5MmQifQ==
+.payment
+
+.discounts (notify me when this article is on discount)
+
+.social sharing buttons
+
+.optimization
+ - do not load all css on app.blade.php that is included in all pages, for example include summernote only on pages where needed. this way homepage should load quickly.
+
+.pagination
+
+.statistics
+ - how many people opened that article
+ 
+.events/workshops
+
+.contact
+
+.footer
+
+.about
+ - make 'site about' to be one of articles so author/admin can edit it like article
+
+creds:
+
+[4:36:08 PM] Predrag Lukesevic: Hostuje se na awardspace.com
+[4:36:25 PM] Predrag Lukesevic: Username : lukesevic@gmail.com
+[4:36:34 PM] Predrag Lukesevic: Pass: nenadl85
+
+Gogin pass za heroku sajt: supica32
+
+.pedja
+ + translate all new text
+ - remove hr tags
+ + background pictures not to scroll
+ + inline indentation (tabs -> 2 spaces)
+ - 
+
+igor:
+
++prikazuje kurseve samo ako ima chlanak u njemu
++ ukloniti skroz basta iz menija i sa home page
++kratko about o autoru/psihologu sa linkom ka njegovim textovima
+ 
+
+ +online kachenje za laravel, free ili trial bar mesec dana
+
+ -dodati tag workshop???
+
+ -namestiti workshop, da prikazuje isto kao i article ali samo ako su tagovani kao workshop,
+  a u artiklima da prikazuje one koje nisu tagovani kao workshop???
+
+  +goga da moze da izlista sve komentare i da moze da brise komentare
+
+  - autor da moze u toku kreiranja articla i da kreira tag
+     +tag moze da bude i vise reci
+     + razdvajaju se na mestu razmaka
+     + proveriti da li tag postoji, ako ne postoji onda ga dodati u tabelu sa tagovima
+
+  +proveriti register
+
+-redesign!!! po goginim primerima :)
+
+- home page bez w3scool css?
+- remove js code from app.blade
