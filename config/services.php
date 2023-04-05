@@ -36,22 +36,22 @@ return [
     ],
 
     'google' => [
-        'client_id' => '153237184271-btq370jmm00kjub501bvusm1765ep432.apps.googleusercontent.com',
-        'client_secret' => '8-eLWRZhDj199CdBq7AwzIPC',
-        'redirect' => 'https://institutpp.com/callback/google',
+        'client_id' => env('GOOGLE_ID'),
+        'client_secret' => env('GOOGLE_SECRET'),
+        'redirect' => env('GOOGLE_REDIRECT'),
     ],
 
     'facebook' => [
-    'client_id' => '122590138393703',
-    'client_secret' => 'b2a188ae62ef9aca07dea9a01f6d4086',
-    'redirect' => 'https://institutpp.com/callback/facebook',
+    'client_id' => env('FACEBOOK_ID'),
+    'client_secret' => env('FACEBOOK_SECRET'),
+    'redirect' => env('FACEBOOK_REDIRECT'),
     
     ],
 
     'twitter' => [
-    'client_id' => 'xXy8z4ZueK0TF2eEjCJItwKzd',
-    'client_secret' => '9QhdPBJ1ZkKUoWVlgtX8SlVnZaxmLuykV5z6Dn4jI09qFMM4Fu',
-    'redirect' => 'https://institutpp.com/callback/twitter',
+    'client_id' => env('TWITTER_ID'),
+    'client_secret' => env('TWITTER_SECRET'),
+    'redirect' => env('TWITTER_REDIRECT'),
     
     ]
 
