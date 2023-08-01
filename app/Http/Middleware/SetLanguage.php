@@ -22,10 +22,9 @@ class SetLanguage
     {
         //
         Log::info('Showing middle: ' . $request->cookie('lang'));
-
-        //if($request->cookie('lang')) 
-            App::setLocale('sr');
         
+        if($request->cookie('lang')) App::setLocale($request->cookie('lang'));
+
         return $next($request);
     }
 }
